@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Add</title>
+	</head>
+	<body>
+	<input id="input" type="text">
+	<button id="button">add</button>
+	<ul id="ul">
+		<!-- <li>minh</li>
+		<li>mai</li>
+		<li>hien</li> -->
+	</ul>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript">
+		var url = "http://localhost:3000/content";
+		axios.get(url).then(function(res){
+			var item = res.data;
+			people(item);
+		})
+
+	var input = document.getElementById('input');
+	var button = document.getElementById('button');
+	button.addEventListener('click', addItem);
+
+	function addItem(){
+			var newInput = input.value;
+			axios.post(url, {
+				content: newInput
+			}).then(function(res) {
+				axios.get(url).then(function(res){
+				 var item = res.data;
+				 people(item);
+				})
+			});
+			input.value = '';
+	}
+
+	function people(item){
+		var ul = document.getElementById('ul');
+		var content = item.map(function(x){
+			return '<li>' + x.content + '</li>';
+		});
+		ul.innerHTML = content.join('');
+	};
+	people([]);
+	</script>	
+	</body>
+</html>

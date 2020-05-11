@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Onclick</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<button id="buttonAdd">add</button>
+	<button id="buttonDelete">delete</button>
+	<ul id="ul">
+		
+	</ul>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript">
+	var url = "http://localhost:3000/content";
+	var buttonAdd = document.getElementById('buttonAdd');
+	var buttonDelete = document.getElementById('buttonDelete');
+	buttonAdd.addEventListener('click', function() {
+		window.location.href = './add.html';
+	});
+
+	buttonDelete.addEventListener('click', function() {
+		window.location.href = './delete.html'
+	});
+
+	axios.get(url).then(function(res){
+		var item = res.data;
+		people(item);
+	})
+	
+	function people(item){
+		var ul = document.getElementById('ul');
+		var content = item.map(function(x){
+			return '<li>' + x.content + '</li>';
+		});
+		ul.innerHTML = content.join('');
+	};
+	</script>
+</body>
+</html>

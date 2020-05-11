@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Delete</title>
+	</head>
+	<body>
+	<ul id="ul">
+		<!-- <li>minh</li>
+		<li>mai</li>
+		<li>hien</li> -->
+	</ul>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript">
+		var ul = document.getElementById('ul');
+		var url = "http://localhost:3000/content";
+
+		axios.get(url).then(function(res){
+			var item = res.data;
+			people(item);
+		})
+
+	ul.addEventListener('click', Delet);
+	function Delet(event) {
+		var tab = event.target;
+		i = parseInt(tab.dataset.id) + 1;
+		 axios.delete('http://localhost:3000/content/'+ i +'',{
+
+		});
+		 axios.get(url).then(function(res){
+			var item = res.data;
+			people(item);
+		})
+	}
+		
+	function people(item){
+		var content = item.map(function(x, i){
+			return '<li>' + x.content + '<button data-id="'+ i +'">Delete</button></li>';
+		});
+		ul.innerHTML = content.join('');
+	};
+	people([]);
+	</script>	
+	</body>
+</html>

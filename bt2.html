@@ -1,0 +1,58 @@
+<!--  
+1. Tạo một REST api server sử dụng json-server
+2. Đọc documentation của json-server và axios, tìm hiểu các method GET, POST, PUT, PATCH, DELETE
+3. Làm các ví dụ sử dụng axios để gửi các request lên json-server để tạo object mới, update 1 object với dữ liệu 	mới, xoá 1 object
+Lưu ý: đây là một bài khó nếu bạn là beginner, tuy nhiên, khi hiểu được bài này bạn sẽ có thể lên 1 level mới (beginner cao cấp).
+
+Hãy dành 1 ngày để đọc, tìm hiểu, thử. Sau 1 ngày nếu bạn không làm được thì có thể hỏi trên Coders.Tokyo Slack hoặc JsLand. -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BT2</title>
+</head>
+<p id="1"></p>
+<body>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript">
+		var p = document.getElementById("1");
+
+		axios.get('http://localhost:9088/conten')
+		.then(function(res){
+			var data = res.data;
+			p.innerHTML = JSON.stringify(data);
+		})
+
+
+		axios.post('http://localhost:9088/conten',{
+			name:'hien',
+			age:'30',
+			emai:'mehien@gmail.com',
+			phone:'098542124'
+		})
+		.then(function(res){
+			console.log(res.data);
+		})
+
+		axios.put('http://localhost:3000/conten/1',{
+			name: "nguyễn đức minh",
+			agge: 20,
+			email: "ndminh@gmail.com"
+		})
+		.then(function(res){
+			console.log(res.data);
+		})
+
+		axios.delete('http://localhost:9088/conten/3',{
+
+		})
+		.then(function(res){
+			console.log(res.data);
+		})
+
+
+		
+	</script>
+</body>
+</html>
